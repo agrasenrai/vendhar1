@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendhar Museum - Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="has-news-ticker">
+    <header class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo no bg.png" alt="Vendhar Museum">
+            </a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#exhibitions" class="nav-button scroll-to" data-translate="Exhibitions">Exhibitions</a></li>
+                <li><a href="#about" class="nav-button scroll-to" data-translate="About">About</a></li>
+                <li><a href="/admin/login" class="nav-button" data-translate="Book Tickets">Book Tickets</a></li>
+                <li class="language-selector">
+                    <select id="languageSelect" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Add this news ticker section -->
+    <div class="news-ticker">
+        <div class="ticker-wrap">
+            <div class="ticker-content" id="tickerContent">
+                <!-- News items will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="/assets/videos/home-vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-content">
+                <h1 style="font-weight: bold; letter-spacing: 2.5px;" data-translate="Welcome to Vendhar Museum">Welcome to Vendhar Museum</h1>
+                <span style="font-weight: bold;">________________________________________</span>
+                <p style="letter-spacing: 2px;" data-translate="Discover History, Art, and Culture">Discover History, Art, and Culture</p>
+                <a class="fancy" href="/admin/login">
+                    <span class="top-key"></span>
+                    <span class="text" data-translate="Book Now">Book Now</span>
+                    <span class="bottom-key-1"></span>
+                    <span class="bottom-key-2"></span>
+                </a>
+            </div>
+            <button class="scroll-down" aria-label="Scroll to next section">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+        
+        <section id="exhibitions" class="carousel-section">
+            <h3 class="section-heading" data-translate="Exhibitions of the Museum">Exhibitions of the Museum</h3>
+            <div class="carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/wax2.jpg" alt="Dr. Abdul Kalam Wax Statue">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="Wax Statues of Iconic Figures">Wax Statues of Iconic Figures</h3>
+                                    <p data-translate="Marvel at lifelike wax statues of visionaries like Dr. Abdul Kalam, Walt Disney, MS Dhoni, Mother Teresa, and many more who shaped history.">Marvel at lifelike wax statues of visionaries like Dr. Abdul Kalam, Walt Disney, MS Dhoni, Mother Teresa, and many more who shaped history.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/chancellor.jpg" alt="Chancellor's Life Exhibit">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="A Story of Resilience">A Story of Resilience</h3>
+                                    <p data-translate="Discover the remarkable journey of our chancellor Dr. T. R. Paarivendhar, showcasing his challenges and the motivations that define his legacy.">Discover the remarkable journey of our chancellor Dr. T. R. Paarivendhar, showcasing his challenges and the motivations that define his legacy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/figures3.jpg" alt="Great Sphinx Model">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="Models of Ancient Architectural Wonders">Models of Ancient Architectural Wonders</h3>
+                                    <p data-translate="Witness detailed models of ancient marvels like the Great Sphinx of Giza, the Leaning Tower of Pisa, Colosseum, and more.">Witness detailed models of ancient marvels like the Great Sphinx of Giza, the Leaning Tower of Pisa, Colosseum, and more.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/imp ppl 2.jpg" alt="Global Contributions Exhibit">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="Global Contributions Across Fields">Global Contributions Across Fields</h3>
+                                    <p data-translate="Explore a gallery celebrating pioneers from sports to art, from literature to science, and beyond, who've shaped the world.">Explore a gallery celebrating pioneers from sports to art, from literature to science, and beyond, who've shaped the world.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/elon2.jpg" alt="The Elon Zone">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="The Elon Zone">The Elon Zone</h3>
+                                    <p data-translate="Dive into the futuristic world of Elon Musk, showcasing his groundbreaking innovations with SpaceX and more.">Dive into the futuristic world of Elon Musk, showcasing his groundbreaking innovations with SpaceX and more.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="/assets/images/area.jpg" alt="And More Section">
+                                </div>
+                                <div class="card-content">
+                                    <h3 data-translate="And So Much More!">And So Much More!</h3>
+                                    <p data-translate="This museum has countless treasures waiting to be explored—each visit promises inspiration and discovery.">This museum has countless treasures waiting to be explored—each visit promises inspiration and discovery.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                </button>
+                <button class="carousel-button next">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+        
+
+
+
+        <!-- Add this section after the features section -->
+        <section class="stats-highlight">
+
+            <!-- Move quote container here -->
+            <div class="quote-container">
+                <div class="image-section">
+                    <div class="image-wrapper">
+                        <img src="/assets/images/Dr.-T-R-Paarivendhar-transformed.webp" alt="Picture of Dr. T. R. Paarivendhar">
+                    </div>
+                </div>
+                <div class="quote-section">
+                    <p class="quote-text" data-translate="As we empower young minds to thrive and excel, my greatest dream for SRM's brightest stars to shine with integrity and illuminate the future with determination, and rise as global icons - worldwide.">As we empower young minds to thrive and excel, my greatest dream for SRM's brightest stars to shine with integrity and illuminate the future with determination, and rise as global icons - worldwide.</p>
+                    <p class="sir-name" data-translate="— Dr. T. R. Paarivendhar">— Dr. T. R. Paarivendhar</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-museum">
+            <div class="about-header">
+                <h3>About the Museum</h3>
+                <button class="map-button" onclick="toggleMap()">
+                    <i class="fas fa-map-marker-alt"></i> Show Location
+                </button>
+            </div>
+            <div id="map" class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2010.8083648315624!2d80.04402466034043!3d12.824015233429805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f7001108e1a9%3A0x9e3cd2abaad7d8cd!2sVendhar%20Museum!5e0!3m2!1sen!2sin!4v1733336180784!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <button class="map-close-button" onclick="toggleMap()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="about-container">
+                <div class="about-item">
+                    <div class="about-image">
+                        <img src="/assets/images/about1.jpg" alt="Museum Exterior">
+                    </div>
+                    <div class="about-content">
+                        <h4>A Journey Through Time</h4>
+                        <p>The Vendhar Museum, a proud landmark of our college, is a source of motivation and inspiration for all who visit. Named after our esteemed Chancellor, Dr. T. R. Paarivendhar, "Vendhar" pays homage to his incredible journey from humble beginnings to becoming a visionary leader who founded the SRM family. The museum chronicles his life, the challenges he overcame, and his unwavering commitment to education, which has empowered thousands of students across disciplines such as engineering, law, medicine, and more.</p>
+                    </div>
+                </div>
+
+                <div class="about-reverse">
+                    <div class="about-content">
+                        <h4>Our Mission</h4>
+                        <p>Our mission at the Vendhar Museum is to inspire every visitor to dream big and achieve greatness by showcasing stories of resilience, innovation, and excellence. The museum features exhibits dedicated to remarkable individuals who have achieved greatness in diverse fields, from science and technology to art, music, sports and beyond. Visitors can marvel at innovative AI displays, take a step back in time through exhibits portraying the richness of ancient India, and admire lifelike wax statues of iconic personalities. Every corner of the museum inspires curiosity, celebrates human achievement, and reminds us of the transformative power of education and perseverance. Through these stories and displays, we aim to instill a spirit of determination and a belief that greatness lies within everyone who dares to strive for it.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="/assets/images/about2.jpg" alt="Museum Interior">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <h3 style="padding: 3rem 0 0 0; max-width: 1200px; margin: 0 auto; letter-spacing: 2px;">Testimonials</h3>
+        <div class="slider">
+            <div class="slide-track">
+              <!-- Original 7 slides -->
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Sarah Johnson</div>
+                  <div class="feedback">Great service! Really exceeded my expectations in every way possible.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Michael Chen</div>
+                  <div class="feedback">Best customer support I've ever experienced. The team was incredibly helpful.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Emma Wilson</div>
+                  <div class="feedback">The product quality is outstanding. Would definitely recommend!</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">David Garcia</div>
+                  <div class="feedback">Very professional and efficient team. Always ready to help.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Lisa Thompson</div>
+                  <div class="feedback">Highly recommended to everyone! A fantastic experience from start to finish.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">James Mitchell</div>
+                  <div class="feedback">Amazing value for money. Couldn't be happier with the results.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Anna Kim</div>
+                  <div class="feedback">Fantastic experience overall. Will definitely be coming back!</div>
+                </div>
+              </div>
+              <!-- Duplicate of the exact same 7 slides -->
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Sarah Johnson</div>
+                  <div class="feedback">Great service! Really exceeded my expectations in every way possible.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Michael Chen</div>
+                  <div class="feedback">Best customer support I've ever experienced. The team was incredibly helpful.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Emma Wilson</div>
+                  <div class="feedback">The product quality is outstanding. Would definitely recommend!</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">David Garcia</div>
+                  <div class="feedback">Very professional and efficient team. Always ready to help.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Lisa Thompson</div>
+                  <div class="feedback">Highly recommended to everyone! A fantastic experience from start to finish.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">James Mitchell</div>
+                  <div class="feedback">Amazing value for money. Couldn't be happier with the results.</div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="feedback-box">
+                  <div class="name">Anna Kim</div>
+                  <div class="feedback">Fantastic experience overall. Will definitely be coming back!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--x-->
+
+        
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p data-translate="© 2024 Vendhar Museum. All rights reserved.">&copy; 2024 Vendhar Museum. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="#" data-translate="Privacy Policy">Privacy Policy</a>
+                <a href="#" data-translate="Terms of Service">Terms of Service</a>
+                <a href="#" data-translate="Help?">Help?</a>
+            </nav>
+            <div class="social-icons">
+                <a href="vendharmuseum@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.instagram.com/vendharmuseum?igsh=MTEydDRjcjN3eDJueA==" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://x.com/vendharmuseum?t=ba3oaXhEUhIqgGM83f_mGg&s=09" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Threads"><i class="fab fa-threads"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/translation.js"></script>
+
+    <!-- Add this before closing </body> tag -->
+    <script>
+        async function loadNewsItems() {
+            try {
+                const response = await fetch('http://localhost:3000/news');
+                const data = await response.json();
+                
+                const newsTicker = document.querySelector('.news-ticker');
+                
+                // If news ticker is disabled or no items, hide it
+                if (!data.enabled || !data.items || data.items.length === 0) {
+                    newsTicker.style.display = 'none';
+                    console.log('News ticker disabled or no items');
+                    return;
+                }
+
+                // Show and populate news ticker
+                newsTicker.style.display = 'block';
+                const tickerContent = document.getElementById('tickerContent');
+                
+                // Create ticker items with data-translate attribute
+                tickerContent.innerHTML = data.items.map(item => 
+                    `<span class="ticker-item" data-translate="${item.text}">${item.text}</span>`
+                ).join('');
+                
+                // Translate the newly added content
+                if (window.translator) {
+                    window.translator.translatePage();
+                }
+
+                // Clone items for continuous scrolling after translation
+                setTimeout(() => {
+                    tickerContent.innerHTML += tickerContent.innerHTML;
+                }, 100);
+
+                console.log('News ticker enabled and populated:', data.items);
+            } catch (error) {
+                console.error('Error loading news:', error);
+                document.querySelector('.news-ticker').style.display = 'none';
+            }
+        }
+
+        // Load news items when page loads and every 30 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            loadNewsItems();
+            setInterval(loadNewsItems, 30000); // Refresh every 30 seconds
+        });
+
+        // Add this function to check booking status
+        async function checkBookingStatus() {
+            try {
+                const response = await fetch('http://localhost:3000/booking-status');
+                const data = await response.json();
+                
+                // Update all booking links based on system status
+                const bookingLinks = document.querySelectorAll('a[href="admin/login.html"]');
+                bookingLinks.forEach(link => {
+                    link.href = data.enabled ? 'admin/login.html' : 'admin/bookings-closed.html';
+                });
+            } catch (error) {
+                console.error('Error checking booking status:', error);
+            }
+        }
+
+        // Check booking status when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            checkBookingStatus();
+            // Existing news ticker code...
+        });
+
+        // Add this at the beginning of your admin dashboard related code
+        function checkAdminAuth() {
+            const adminAuth = sessionStorage.getItem('adminAuth');
+            if (!adminAuth) {
+                window.location.href = 'adminlogin.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Modify the admin logout function
+        function adminLogout() {
+            sessionStorage.removeItem('adminAuth');
+            window.location.href = 'adminlogin.html';
+        }
+
+        // Add this check at the beginning of all admin dashboard functions
+        function showAdminDashboard() {
+            if (!checkAdminAuth()) return;
+            // ... rest of the existing showAdminDashboard code ...
+        }
+
+        function showTicketChecker() {
+            if (!checkAdminAuth()) return;
+            // ... rest of the existing showTicketChecker code ...
+        }
+
+        // Replace the existing validateTicket function with this MySQL version
+        function validateTicket() {
+            if (!checkAdminAuth()) return;
+            
+            const ticketId = document.getElementById('ticketInput').value;
+            const resultDiv = document.getElementById('validationResult');
+
+            // Make API call to your backend to validate the ticket
+            fetch(`/api/validate-ticket/${ticketId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    resultDiv.innerHTML = data.message;
+                    resultDiv.style.color = 'red';
+                    return;
+                }
+
+                resultDiv.innerHTML = 'Valid Ticket! Marked as claimed.<br>' +
+                                    'Time slot: ' + data.slot_time;
+                resultDiv.style.color = 'green';
+            })
+            .catch(error => {
+                resultDiv.innerHTML = 'Error validating ticket';
+                resultDiv.style.color = 'red';
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+</body>
+</html> 
