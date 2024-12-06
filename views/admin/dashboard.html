@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SRMIST Museum</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="/">
+                    <img src="https://d23qowwaqkh3fj.cloudfront.net/wp-content/uploads/2022/01/srm-logo.svg.gzip" alt="SRMIST Museum">
+                </a>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </li>
+                    <li data-section="tickets">
+                        <i class="fas fa-ticket-alt"></i> Ticket Management
+                    </li>
+                    <li data-section="adminBooking">
+                        <i class="fas fa-plus-circle"></i> Admin Booking
+                    </li>
+                    <li data-section="system">
+                        <i class="fas fa-cogs"></i> System Control
+                    </li>
+                    <li data-section="content">
+                        <i class="fas fa-edit"></i> Content Management
+                    </li>
+                    <li data-section="checker">
+                        <i class="fas fa-qrcode"></i> Ticket Checker
+                    </li>
+                    <li data-section="news">
+                        <i class="fas fa-newspaper"></i> News Ticker
+                    </li>
+                    <li id="logoutBtn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="active">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Today's Bookings</h3>
+                        <p id="todayBookings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <p id="totalRevenue">₹0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Bookings</h3>
+                        <p id="activeBookings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Available Slots</h3>
+                        <p id="availableSlots">0</p>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Visitor Trends</h3>
+                        <canvas id="visitorTrends"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Peak Hours</h3>
+                        <canvas id="peakHours"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ticket Management Section -->
+            <section id="tickets">
+                <h1>Ticket Management</h1>
+                <div class="search-bar">
+                    <div class="filter-group">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchBookings" placeholder="Search by name, email, phone, or booking ID...">
+                        </div>
+                        
+                        <div class="filter-row">
+                            <div class="filter-item">
+                                <label>Status</label>
+                                <select id="filterStatus">
+                                    <option value="">All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="cancelled by admin">Cancelled by Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-item">
+                                <label>Date Range</label>
+                                <div class="date-range">
+                                    <input type="date" id="filterDateFrom" placeholder="From">
+                                    <input type="date" id="filterDateTo" placeholder="To">
+                                </div>
+                            </div>
+
+                            <div class="filter-item">
+                                <label>Time Slot</label>
+                                <select id="filterTimeSlot">
+                                    <option value="">All Time Slots</option>
+                                    <!-- Time slots will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div class="filter-item">
+                                <label>Sort By</label>
+                                <select id="sortBookings">
+                                    <option value="date_desc">Date (Newest First)</option>
+                                    <option value="date_asc">Date (Oldest First)</option>
+                                    <option value="id_desc">Booking ID (Highest First)</option>
+                                    <option value="id_asc">Booking ID (Lowest First)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="searchBtn" class="action-btn">
+                                <i class="fas fa-filter"></i> Apply Filters
+                            </button>
+                            <button id="resetFilters" class="action-btn secondary">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                            <button id="exportBookings" class="action-btn success">
+                                <i class="fas fa-file-export"></i> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bookings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Tickets</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Bookings will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add Booking Details Modal -->
+                <div id="bookingModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Booking Details</h2>
+                        <div class="booking-details-grid">
+                            <div class="detail-section">
+                                <h3>User Information</h3>
+                                <p><strong>Name:</strong> <span id="modalUserName"></span></p>
+                                <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
+                                <p><strong>Phone:</strong> <span id="modalUserPhone"></span></p>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Booking Information</h3>
+                                <p><strong>Booking ID:</strong> <span id="modalBookingId"></span></p>
+                                <p><strong>Visit Date:</strong> <span id="modalVisitDate"></span></p>
+                                <p><strong>Time Slot:</strong> <span id="modalTimeSlot"></span></p>
+                                <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Ticket Details</h3>
+                                <p><strong>Adult Tickets:</strong> <span id="modalAdultTickets"></span></p>
+                                <p><strong>Child Tickets:</strong> <span id="modalChildTickets"></span></p>
+                                <p><strong>Senior Tickets:</strong> <span id="modalSeniorTickets"></span></p>
+                                <p><strong>Total Amount:</strong> ₹<span id="modalAmount"></span></p>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Payment Information</h3>
+                                <p><strong>Payment ID:</strong> <span id="modalPaymentId"></span></p>
+                                <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+                                <p><strong>Payment Status:</strong> <span id="modalPaymentStatus"></span></p>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button id="cancelBookingBtn" class="cancel-btn">Cancel Booking</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Control Section -->
+            <section id="system">
+                <h1>System Control</h1>
+                <div class="control-grid">
+                    <div class="control-card">
+                        <h3>Booking System</h3>
+                        <label class="switch">
+                            <input type="checkbox" id="bookingSystemToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <p>Enable/Disable booking system</p>
+                    </div>
+
+                    <div class="control-card">
+                        <h3>Time Slots <button class="refresh-btn" onclick="loadTimeSlots()"><i class="fas fa-sync"></i></button></h3>
+                        <div id="timeSlotManager">
+                            <table class="slots-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time Slot</th>
+                                        <th>Max Capacity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="timeSlotsTableBody">
+                                    <!-- Time slots will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="slot-form">
+                            <input type="time" id="newSlotTime" step="1800">
+                            <input type="number" id="newSlotCapacity" placeholder="Max Capacity" min="1">
+                            <button id="addSlotBtn" class="action-btn">Add New Slot</button>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <h3>Ticket Pricing <button class="refresh-btn" onclick="loadTicketPrices()"><i class="fas fa-sync"></i></button></h3>
+                        <div id="pricingManager">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket Type</th>
+                                        <th>Price (₹)</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pricingTableBody">
+                                    <!-- Pricing will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="price-form">
+                            <select id="newTicketType">
+                                <option value="adult">Adult</option>
+                                <option value="child">Child</option>
+                                <option value="senior">Senior</option>
+                            </select>
+                            <input type="number" id="newTicketPrice" placeholder="Price" min="0">
+                            <button id="addPriceBtn" class="action-btn">Add Price</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Management Section -->
+            <section id="content">
+                <h1>Content Management</h1>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Museum Information</h3>
+                        <textarea id="museumInfo" rows="5"></textarea>
+                        <button>Update</button>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Announcements</h3>
+                        <div id="announcements">
+                            <!-- Announcements will be populated here -->
+                        </div>
+                        <button id="addAnnouncement">Add Announcement</button>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>FAQs</h3>
+                        <div id="faqManager">
+                            <!-- FAQs will be populated here -->
+                        </div>
+                        <button id="addFAQ">Add FAQ</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ticket Checker Section -->
+            <section id="checker">
+                <h1>Ticket Checker</h1>
+                <div class="checker-container">
+                    <div class="scanner-section">
+                        <video id="qrScanner"></video>
+                        <div class="scanner-controls">
+                            <button id="startScan" class="scan-btn">Start Scanner</button>
+                            <button id="captureFrame" class="scan-btn" disabled>Capture Frame</button>
+                        </div>
+                        <canvas id="capturedFrame" style="display: none;"></canvas>
+                    </div>
+                    <div class="ticket-info">
+                        <h2>Ticket Information</h2>
+                        <div id="ticketDetails" class="details-card">
+                            <p><strong>Booking ID:</strong> <span id="bookingId">-</span></p>
+                            <p><strong>Customer Name:</strong> <span id="customerName">-</span></p>
+                            <p><strong>Visit Date:</strong> <span id="visitDate">-</span></p>
+                            <p><strong>Time Slot:</strong> <span id="timeSlot">-</span></p>
+                            <p><strong>Adult Tickets:</strong> <span id="adultTickets">-</span></p>
+                            <p><strong>Child Tickets:</strong> <span id="childTickets">-</span></p>
+                            <p><strong>Senior Tickets:</strong> <span id="seniorTickets">-</span></p>
+                            <p><strong>Status:</strong> <span id="ticketStatus">-</span></p>
+                        </div>
+                        <button id="markCompleted" class="complete-btn" disabled>Mark as Completed</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Ticker Management Section -->
+            <section id="news">
+                <h1>News Ticker Management</h1>
+                <div class="news-manager">
+                    <div class="news-header">
+                        <h3>News Ticker Status</h3>
+                        <label class="switch">
+                            <input type="checkbox" id="newsTickerToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <p>Enable/Disable news ticker on homepage</p>
+                    </div>
+                    <div class="news-form">
+                        <input type="text" id="newNewsItem" placeholder="Enter news item text">
+                        <button id="addNewsItem" class="action-btn">Add News Item</button>
+                    </div>
+                    <div class="news-list">
+                        <h3>Current News Items</h3>
+                        <ul id="newsItemsList">
+                            <!-- News items will be listed here -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add this new section -->
+            <section id="adminBooking">
+                <h1>Admin Booking</h1>
+                <div class="booking-form-container">
+                    <form id="adminBookingForm" class="admin-booking-form">
+                        <div class="form-group">
+                            <label>User Details</label>
+                            <input type="text" id="adminBookingName" placeholder="Customer Name" required>
+                            <input type="email" id="adminBookingEmail" placeholder="Email" required>
+                            <input type="tel" id="adminBookingPhone" placeholder="Phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Visit Details</label>
+                            <input type="date" id="adminBookingDate" required>
+                            <select id="adminBookingTimeSlot" required>
+                                <option value="">Select Time Slot</option>
+                                <!-- Time slots will be populated dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tickets</label>
+                            <div class="ticket-inputs">
+                                <div>
+                                    <label>Adult Tickets:</label>
+                                    <input type="number" id="adminAdultTickets" min="0" value="0">
+                                </div>
+                                <div>
+                                    <label>Child Tickets:</label>
+                                    <input type="number" id="adminChildTickets" min="0" value="0">
+                                </div>
+                                <div>
+                                    <label>Senior Tickets:</label>
+                                    <input type="number" id="adminSeniorTickets" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-summary">
+                            <h3>Booking Summary</h3>
+                            <p>Total Tickets: <span id="adminTotalTickets">0</span></p>
+                            <p>Total Amount: ₹<span id="adminTotalAmount">0</span></p>
+                        </div>
+
+                        <button type="submit" class="action-btn">Create Booking</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="/js/admin-dashboard.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script>
+        function logout() {
+            // First redirect
+            window.location.href = '/admin/adminlogin';
+            // Then clear storage
+            sessionStorage.removeItem('adminAuth');
+            localStorage.removeItem('adminToken');
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="Details - Vendhar Museum">Details - Vendhar Museum</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo no bg.png" alt="Vendhar Museum">
+            </a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a class="nav-button" href="/" data-translate="Home">Home</a></li>
+                <li class="language-selector">
+                    <select id="languageSelect" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="left-panel">
+            <h1 data-translate="Welcome">Welcome</h1>
+            <p data-translate="Please enter your details to proceed with registration. We ensure your information remains secure and confidential.">Please enter your details to proceed with registration. We ensure your information remains secure and confidential.</p>
+        </div>
+        <div class="right-panel">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="name" data-translate="Full Name">Full Name</label>
+                    <input type="text" id="name" required data-translate-placeholder="Enter your name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email" data-translate="Email Address">Email Address</label>
+                    <input type="email" id="email" required data-translate-placeholder="Enter your email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="phone" data-translate="Phone Number">Phone Number</label>
+                    <input type="text" id="phone" required data-translate-placeholder="Enter your phone number" placeholder="Enter your phone number">
+                </div>
+                <button type="submit" class="submit-btn" data-translate="Proceed">Proceed</button>
+            </form>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/translation.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+</html>

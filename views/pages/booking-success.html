@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="Booking Successful - Vendhar Museum">Booking Successful - Vendhar Museum</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        :root {
+            --primary: #ecb45b;
+            --primary-light: #f0c17a;
+            --dark: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #fff8f4, #fff);
+        }
+
+        main.success-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 40px 40px;
+            min-height: 100vh;
+        }
+
+        .confirmation-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(236, 180, 91, 0.15);
+            width: 100%;
+            max-width: 1200px;
+            padding: 3rem;
+            animation: fadeIn 1s ease-out;
+            display: grid;
+            grid-template-columns: 200px 1fr 250px;
+            gap: 3rem;
+            align-items: start;
+            margin: 0 auto;
+        }
+
+        .left-section {
+            text-align: center;
+            width: 100%;
+        }
+
+        .success-circle {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .success-circle svg {
+            width: 25px;
+            height: 25px;
+            stroke: white;
+            stroke-width: 2;
+            animation: drawCheck 1s ease-out forwards;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .middle-section {
+            padding: 0;
+        }
+
+        .heading {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .detail-item {
+            padding: 1rem;
+            border-radius: 8px;
+            background: #fff8f4;
+            transition: transform 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .detail-item:hover {
+            transform: translateX(5px);
+            background: #fff1e6;
+        }
+
+        .label {
+            color: var(--dark);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        .value {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .tickets-section {
+            background: var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .print-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .print-button:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        @keyframes drawCheck {
+            from { stroke-dasharray: 0 100; }
+            to { stroke-dasharray: 100 100; }
+        }
+
+        @media (max-width: 768px) {
+            main.success-container {
+                padding: 80px 20px 20px;
+            }
+
+            .confirmation-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+            
+            .left-section {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                justify-content: center;
+            }
+
+            .qr-code {
+                width: 120px;
+                height: 120px;
+            }
+
+            .heading {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .confirmation-card {
+                grid-template-columns: 180px 1fr 220px;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .qr-code {
+                width: 130px;
+                height: 130px;
+            }
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header no-print">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo no bg.png" alt="Vendhar Museum">
+            </a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="/" class="nav-button">Home</a></li>
+                <li><a href="/admin/login" class="nav-button" data-translate="Book Tickets">Book Tickets</a></li>
+                <li class="language-selector">
+                    <select id="languageSelect" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="success-container">
+        <div class="confirmation-card">
+            <div class="left-section">
+                <div class="success-circle">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M20 6L9 17L4 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div id="qrCode" class="qr-code"></div>
+            </div>
+            <div class="right-section">
+                <h1 data-translate="Booking Successful!">Booking Successful!</h1>
+                <p data-translate="Your museum visit has been confirmed.">Your museum visit has been confirmed.</p>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <h2 data-translate="Booking Information">Booking Information</h2>
+                        <p><strong data-translate="Booking ID:">Booking ID:</strong> <span id="bookingId"></span></p>
+                        <p><strong data-translate="Date:">Date:</strong> <span id="visitDate"></span></p>
+                        <p><strong data-translate="Time Slot:">Time Slot:</strong> <span id="timeSlot"></span></p>
+                    </div>
+                    <div class="detail-item">
+                        <h2 data-translate="Ticket Details">Ticket Details</h2>
+                        <p><strong data-translate="Adult Tickets:">Adult Tickets:</strong> <span id="adultTickets"></span></p>
+                        <p><strong data-translate="Child Tickets:">Child Tickets:</strong> <span id="childTickets"></span></p>
+                        <p><strong data-translate="Senior Tickets:">Senior Tickets:</strong> <span id="seniorTickets"></span></p>
+                    </div>
+                </div>
+                <button onclick="window.print()" class="print-button no-print" data-translate="Print Ticket">Print Ticket</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/translation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
+            
+            if (!bookingDetails) {
+                window.location.href = '/tickets';
+                return;
+            }
+
+            // Format date
+            const formatDate = (dateString) => {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('en-US', options);
+            };
+
+            // Populate booking details
+            document.getElementById('bookingId').textContent = bookingDetails.bookingId;
+            document.getElementById('visitDate').textContent = formatDate(bookingDetails.visitDate);
+            document.getElementById('timeSlot').textContent = bookingDetails.timeSlot;
+            document.getElementById('adultTickets').textContent = bookingDetails.adultTickets || '0';
+            document.getElementById('childTickets').textContent = bookingDetails.childTickets || '0';
+            document.getElementById('seniorTickets').textContent = bookingDetails.seniorTickets || '0';
+
+            // Generate QR Code
+            const qrData = JSON.stringify({
+                bookingId: bookingDetails.bookingId,
+                visitDate: bookingDetails.visitDate,
+                timeSlot: bookingDetails.timeSlot,
+                totalTickets: parseInt(bookingDetails.adultTickets || 0) + 
+                             parseInt(bookingDetails.childTickets || 0) + 
+                             parseInt(bookingDetails.seniorTickets || 0)
+            });
+
+            new QRCode(document.getElementById('qrCode'), {
+                text: qrData,
+                width: 200,
+                height: 200,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Clear booking details from localStorage after 5 minutes
+            setTimeout(() => {
+                localStorage.removeItem('bookingDetails');
+            }, 300000);
+        });
+    </script>
+    <script src="/js/main.js"></script>
+</body>
+</html> 

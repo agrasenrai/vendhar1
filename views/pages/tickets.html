@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - SRMIST Museum</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tickets.css">
+    <link href="" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo no bg.png" alt="Vendhar Museum">
+            </a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="/" class="nav-button">Home</a></li>
+                <li class="language-selector">
+                    <select id="languageSelect" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="tickets-container" id="ticketsContent">
+        <h1 data-translate="Book Your Tickets">Book Your Tickets</h1>
+        
+        <div class="booking-section">
+            <form id="ticketForm" class="ticket-form">
+                <div class="form-group">
+                    <label for="visitDate" data-translate="Select Date:">Select Date:</label>
+                    <input type="date" id="visitDate" required min="">
+                </div>
+
+                <div class="form-group">
+                    <label for="timeSlot" data-translate="Select Time Slot:">Select Time Slot:</label>
+                    <select id="timeSlot" required>
+                        <option value="" data-translate="Choose a time slot">Choose a time slot</option>
+                    </select>
+                </div>
+
+                <div class="ticket-types">
+                    <div class="form-group">
+                        <label for="adultTickets" data-translate="Adult Tickets:">Adult Tickets:</label>
+                        <input type="number" id="adultTickets" min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="childTickets" data-translate="Children Tickets:">Children Tickets:</label>
+                        <input type="number" id="childTickets" min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seniorTickets" data-translate="Senior Citizen Tickets:">Senior Citizen Tickets:</label>
+                        <input type="number" id="seniorTickets" min="0" value="0">
+                    </div>
+                </div>
+
+                <button id="confirmBooking" class="confirm-btn" disabled data-translate="Confirm Booking">Confirm Booking</button>
+            </form>
+        </div>
+    </main>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/tickets.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+</html>
